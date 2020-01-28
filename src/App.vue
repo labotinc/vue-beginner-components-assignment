@@ -1,35 +1,20 @@
 <template>
   <div id="app">
     <div class="container">
-      <div class="card" v-for="(company, index) in companies" :key="index">
-        <h2>{{ company.name }}</h2>
-
-        <div class="card-content">
-          <div class="card-employee">
-            <span>{{ company.employee.position }}</span>
-            <h1>{{ company.employee.englishName }}</h1>
-            <span>{{ company.employee.japaneseName }}</span>
-          </div>
-
-          <footer class="card-company">
-            <span>{{ company.fullName }}</span>
-            <span>{{ company.zipCode }}</span>
-            <span>{{ company.address }}</span>
-            <span>{{ company.addressExtended }}</span>
-            <span>
-              MAIL
-              <span>{{ company.employee.email }}</span>
-            </span>
-          </footer>
-        </div>
-      </div>
+      <app-card
+        v-for="(company, index) in companies"
+        :key="index"
+        :company="company"
+      ></app-card>
     </div>
   </div>
 </template>
 
 <script>
+import Card from "./Card";
 export default {
   name: "app",
+  components: { "app-card": Card },
   data() {
     return {
       companies: [
@@ -67,7 +52,6 @@ export default {
 
 <style lang="scss">
 $bg: #fceeb5;
-$border: #dcdcdc;
 
 body {
   background-color: $bg;
@@ -86,61 +70,5 @@ body {
   display: flex;
   align-items: center;
   flex-direction: column;
-}
-
-.card {
-  background-color: #ffffff;
-  border: 1px solid $border;
-  min-width: 500px;
-  max-width: 500px;
-  min-height: 270px;
-  padding: 30px;
-  display: flex;
-  justify-content: flex-end;
-  flex-wrap: wrap;
-  margin: 15px 0;
-
-  h2 {
-    margin: 0;
-    width: 100%;
-  }
-
-  .card-employee {
-    margin-bottom: 30px;
-    span {
-      &:first-of-type {
-        font-weight: bold;
-      }
-
-      &:last-of-type {
-        opacity: 0.7;
-      }
-    }
-
-    h1 {
-      margin: 5px 0;
-    }
-  }
-
-  .card-company {
-    font-weight: 500;
-    display: flex;
-    flex-direction: column;
-
-    span {
-      font-size: 14px;
-      &:first-of-type {
-        font-size: 15px;
-      }
-
-      &:nth-of-type(2) {
-        font-size: 12px;
-      }
-
-      & > span {
-        font-weight: bold;
-      }
-    }
-  }
 }
 </style>
